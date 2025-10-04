@@ -105,9 +105,9 @@ export const Navbar = () => {
                         <Link to="/sucursales" className="text-foreground hover:text-primary transition-colors font-medium">
                             Sucursales
                         </Link>
-                        <Link to="/distribuidores" className="text-foreground hover:text-primary transition-colors font-medium">
+                        {/* <Link to="/distribuidores" className="text-foreground hover:text-primary transition-colors font-medium">
                             Distribuidores
-                        </Link>
+                        </Link> */}
                     </nav>
 
                     {/* Actions */}
@@ -152,9 +152,9 @@ export const Navbar = () => {
                             <Link to="/sucursales" className="text-foreground hover:text-primary transition-colors font-medium">
                                 Sucursales
                             </Link>
-                            <Link to="/distribuidores" className="text-foreground hover:text-primary transition-colors font-medium">
+                            {/* <Link to="/distribuidores" className="text-foreground hover:text-primary transition-colors font-medium">
                                 Distribuidores
-                            </Link>
+                            </Link> */}
                             <Button
                                 className="w-full bg-emerald-500 hover:bg-emerald-600 text-primary-foreground hover:brightness-110"
                                 onClick={() => setIsQuoteOpen(true)}

@@ -160,21 +160,77 @@ export const HomePage = () => {
                         ))}
                     </div>
                 </div>
-            <div className="py-10 px-6 flex items-center justify-center">
-                <div className="relative overflow-hidden flex flex-col justify-center items-center rounded-tl-4xl rounded-br-4xl h-140 w-full px-6">
-                    <img src="/Banner4.jpg" alt="Banner4" className="absolute w-full h-full object-cover" />
-                    <div className="relative z-10 p-6 md:p-12 bg-white rounded-tl-4xl rounded-br-4xl text-center">
-                        <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground text-center">
-                            Descubre qué sucursal está más cerca de ti
-                        </h3>
-                        <Button className="mt-6 bg-primary hover:bg-primary/90 text-primary-foreground text-lg !px-8 !py-6">
-                            Ver Sucursales
-                        </Button>
+                <div className="py-10 px-6 flex items-center justify-center">
+                    <div className="relative overflow-hidden flex flex-col justify-center items-center rounded-tl-4xl rounded-br-4xl h-140 w-full px-6">
+                        <img
+                            src="/Banner5.webp"
+                            alt="Equipo trabajando en taller textil"
+                            className="absolute inset-0 w-full h-full object-cover"
+                        />
+                        {/* Overlay para contraste */}
+                        <div className="absolute inset-0 bg-black/30" />
 
+                        {/* Contenido */}
+                        <div className="relative z-10 p-6 md:p-12 bg-white/95 dark:bg-background/90 backdrop-blur rounded-tl-4xl rounded-br-4xl text-center max-w-3xl">
+                            <span className="inline-block text-xs font-semibold tracking-wide uppercase text-emerald-600 mb-2">
+                                Quiénes somos
+                            </span>
+
+                            <h3 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">
+                                Tu aliado en mayoreo para prendas de alta rotación
+                            </h3>
+
+                            <p className="mt-3 text-base sm:text-lg text-muted-foreground">
+                                Fabricamos y distribuimos básicos confiables con enfoque en calidad, tiempos de entrega
+                                y precios competitivos. Acompañamos a marcas, equipos y negocios a escalar sin complicaciones.
+                            </p>
+
+                            <div className="mt-6 flex items-center justify-center gap-3">
+                                <Button className="bg-primary hover:bg-primary/90 text-primary-foreground text-lg !px-8 !py-6">
+                                    Conócenos
+                                </Button>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <div className="py-10 px-6 flex items-center justify-center">
+                    <div className="relative overflow-hidden flex flex-col justify-center items-center rounded-tl-4xl rounded-br-4xl h-140 w-full px-6">
+                        {/* Fondo */}
+                        <img
+                            src="/Banner4.jpg"
+                            alt="Mapa y localización de sucursales"
+                            className="absolute inset-0 w-full h-full object-cover"
+                        />
+                        {/* Overlay para mejor contraste */}
+                        <div className="absolute inset-0 bg-black/30" />
 
-            </div>
+                        {/* Contenido */}
+                        <div className="relative z-10 p-6 md:p-12 bg-white/95 dark:bg-background/90 backdrop-blur rounded-tl-4xl rounded-br-4xl text-center max-w-3xl">
+                            <span className="inline-block text-xs font-semibold tracking-wide uppercase text-emerald-600 mb-2">
+                                Sucursales
+                            </span>
+
+                            <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground">
+                                Encuentra la sucursal más cercana a ti
+                            </h3>
+
+                            <p className="mt-3 text-base sm:text-lg text-muted-foreground">
+                                Ubica tu punto de atención ideal y recibe asesoría para compras al mayoreo.
+                                Retiro en tienda y opciones de envío rápido según tu ubicación.
+                            </p>
+
+                            <div className="mt-6 flex items-center justify-center gap-3">
+                                <Button className="bg-primary hover:bg-primary/90 text-primary-foreground text-lg !px-8 !py-6">
+                                    Ver sucursales
+                                </Button>
+                            </div>
+
+                            <p className="mt-4 text-xs text-muted-foreground">
+                                * Disponibilidad y tiempos pueden variar por zona.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     )
