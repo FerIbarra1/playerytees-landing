@@ -1,6 +1,6 @@
-import { Menu } from "lucide-react"
+import { Menu, ShoppingCart } from "lucide-react"
 import { Button } from "../ui/button"
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import { Link } from "react-router"
 import { ModeToggle } from "../theme/ThemeToggle"
 
@@ -21,10 +21,17 @@ import {
 } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+import {
+    Drawer,
+    DrawerContent,
+    DrawerDescription,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerTitle,
+} from "@/components/ui/drawer"
+import { useCart } from "@/context/CartContext"
 
-// const WHATSAPP_NUMBER_INTL = "526622914052" // +52 662 291 4052
-const WHATSAPP_NUMBER_INTL = "526428534771" // +52 642 853 4771
-
+const WHATSAPP_NUMBER_INTL = "526428534771"
 const STORE_LABELS: Record<string, string> = {
     centro: "Centro - Hermosillo",
     norte: "Sucursal Norte",
@@ -34,21 +41,21 @@ const STORE_LABELS: Record<string, string> = {
 function buildWhatsappMessage(params: { store: string; message: string }) {
     const storeLabel = STORE_LABELS[params.store] ?? "No especificada"
     const text = [
-        "Hola, me gustaría solicitar una cotización.",
+        "Hola, me gustaria solicitar una cotizacion.",
         "",
         `Sucursal: ${storeLabel}`,
         "",
         "Detalles del pedido:",
-        "• Producto/Modelo: _____________________",
-        "• Tallas/Colores: _______________________",
-        "• Cantidades aproximadas: _______________",
-        "• Personalización (si aplica): __________",
-        "• Fecha estimada de entrega: ____________",
+        "- Producto o modelo: _____________________",
+        "- Tallas o colores: _______________________",
+        "- Cantidades aproximadas: ________________",
+        "- Personalizacion (si aplica): ____________",
+        "- Fecha estimada de entrega: _____________",
         "",
         "Notas adicionales:",
-        params.message.trim() ? params.message.trim() : "—",
+        params.message.trim() ? params.message.trim() : "(sin notas adicionales)",
         "",
-        "¿Podrían apoyarme con disponibilidad, tiempos y costo total? ¡Gracias!"
+        "Podrian apoyarme con disponibilidad, tiempos y costo total? Gracias!",
     ].join("\n")
 
     return encodeURIComponent(text)
@@ -59,6 +66,14 @@ export const Navbar = () => {
     const [isQuoteOpen, setIsQuoteOpen] = useState(false)
     const [store, setStore] = useState<string>("")
     const [message, setMessage] = useState("")
+    const { items, count, isOpen, openCart, closeCart, removeItem, clearCart } = useCart()
+
+    const displayCount = useMemo(() => {
+        if (count > 99) return "99+"
+        return String(count)
+    }, [count])
+
+    const hasItems = items.length > 0
 
     const onSubmitQuote = (e: React.FormEvent) => {
         e.preventDefault()
@@ -98,18 +113,26 @@ export const Navbar = () => {
                     {/* Actions */}
                     <div className="flex items-center gap-3">
                         <ModeToggle />
+                        <Button variant="ghost" size="icon" className="relative" onClick={openCart} aria-label="Abrir carrito">
+                            <ShoppingCart className="h-5 w-5" />
+                            {count > 0 && (
+                                <span className="absolute -right-1 -top-1 flex h-5 min-w-[1.25rem] items-center justify-center rounded-full bg-emerald-500 px-1 text-xs font-semibold text-primary-foreground">
+                                    {displayCount}
+                                </span>
+                            )}
+                        </Button>
                         <Button
                             className="hidden sm:flex bg-emerald-500 hover:bg-emerald-600 text-primary-foreground hover:brightness-110"
                             onClick={() => setIsQuoteOpen(true)}
                         >
-                            Cotizar Ahora
+                            Cotizar ahora
                         </Button>
                         <Button
                             variant="ghost"
                             size="icon"
                             className="md:hidden"
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
-                            aria-label="Abrir menú"
+                            aria-label="Abrir menu"
                         >
                             <Menu className="h-5 w-5" />
                         </Button>
@@ -136,20 +159,95 @@ export const Navbar = () => {
                                 className="w-full bg-emerald-500 hover:bg-emerald-600 text-primary-foreground hover:brightness-110"
                                 onClick={() => setIsQuoteOpen(true)}
                             >
-                                Cotizar Ahora
+                                Cotizar ahora
                             </Button>
                         </nav>
                     </div>
                 )}
             </div>
 
+            <Drawer open={isOpen} onOpenChange={(open) => (open ? openCart() : closeCart())}>
+                <DrawerContent className="items-center">
+                    <DrawerHeader>
+                        <DrawerTitle>Tu carrito</DrawerTitle>
+                        <DrawerDescription>
+                            {hasItems ? "Revisa tus productos seleccionados." : "Tu carrito esta vacio."}
+                        </DrawerDescription>
+                    </DrawerHeader>
+                    <div className="flex flex-col justify-center md:min-w-3xl">
+
+                        <div className="max-h-[50vh] overflow-y-auto px-6 py-4">
+                            {hasItems ? (
+                                <div className="space-y-4">
+                                    {items.map((item) => (
+                                        <div key={item.product.id} className="flex items-start gap-4">
+                                            <img
+                                                src={item.product.image}
+                                                alt={item.product.title}
+                                                className="h-16 w-16 rounded-md border border-border object-cover"
+                                            />
+                                            <div className="flex-1 space-y-1">
+                                                <p className="font-semibold text-foreground">{item.product.title}</p>
+                                                <p className="text-sm text-muted-foreground">Cantidad: {item.quantity}</p>
+                                                {/* <p className="text-sm text-muted-foreground">
+                                                {currencyFormatter.format(item.product.price * item.quantity)}
+                                            </p> */}
+                                            </div>
+                                            <Button
+                                                variant="ghost"
+                                                size="sm"
+                                                className="text-destructive hover:text-destructive"
+                                                onClick={() => removeItem(item.product.id)}
+                                            >
+                                                Quitar
+                                            </Button>
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : (
+                                <p className="text-sm text-muted-foreground">
+                                    Cuando agregues productos desde la lista se mostraran aqui.
+                                </p>
+                            )}
+                        </div>
+
+                        <DrawerFooter>
+                            {/* {hasItems && (
+                            <div className="flex items-center justify-between text-sm font-medium text-foreground">
+                                <span>Total estimado</span>
+                                <span>{currencyFormatter.format(total)}</span>
+                            </div>
+                        )} */}
+                            <Button
+                                className="bg-emerald-500 hover:bg-emerald-600 text-primary-foreground hover:brightness-110"
+                                onClick={() => {
+                                    if (!hasItems) return
+                                    closeCart()
+                                    setIsQuoteOpen(true)
+                                }}
+                                disabled={!hasItems}
+                            >
+                                Cotizar ahora
+                            </Button>
+                            <Button
+                                className="bg-primary hover:bg-primary/90 text-primary-foreground hover:brightness-110"
+                                onClick={() => clearCart()}
+                                disabled={!hasItems}
+                            >
+                                Limpiar carrito
+                            </Button>
+                        </DrawerFooter>
+                    </div>
+                </DrawerContent>
+            </Drawer>
+
             {/* Dialog Cotizar */}
             <Dialog open={isQuoteOpen} onOpenChange={setIsQuoteOpen}>
                 <DialogContent className="sm:max-w-xl">
                     <DialogHeader>
-                        <DialogTitle>Solicitar cotización</DialogTitle>
+                        <DialogTitle>Solicitar cotizacion</DialogTitle>
                         <DialogDescription>
-                            Selecciona la tienda y cuéntanos brevemente tu pedido. Te contactaremos a la brevedad por WhatsApp.
+                            Selecciona la tienda y cuentanos brevemente tu pedido. Te contactaremos a la brevedad por WhatsApp.
                         </DialogDescription>
                     </DialogHeader>
 
@@ -172,7 +270,7 @@ export const Navbar = () => {
                             <Label htmlFor="message">Mensaje</Label>
                             <Textarea
                                 id="message"
-                                placeholder="Ej. Camisetas oversize para staff (negro/blanco), 50 pzas, impresión 1 tinta al frente."
+                                placeholder="Ej. Camisetas oversize para staff (negro/blanco), 50 pzas, impresion 1 tinta al frente."
                                 value={message}
                                 onChange={(e) => setMessage(e.target.value)}
                                 className="min-h-[120px]"
@@ -198,3 +296,5 @@ export const Navbar = () => {
         </header>
     )
 }
+
+

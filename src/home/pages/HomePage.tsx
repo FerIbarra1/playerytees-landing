@@ -160,6 +160,21 @@ export const HomePage = () => {
                         ))}
                     </div>
                 </div>
+            <div className="py-10 px-6 flex items-center justify-center">
+                <div className="relative overflow-hidden flex flex-col justify-center items-center rounded-tl-4xl rounded-br-4xl h-140 w-full px-6">
+                    <img src="/Banner4.jpg" alt="Banner4" className="absolute w-full h-full object-cover" />
+                    <div className="relative z-10 p-6 md:p-12 bg-white rounded-tl-4xl rounded-br-4xl text-center">
+                        <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground text-center">
+                            Descubre qué sucursal está más cerca de ti
+                        </h3>
+                        <Button className="mt-6 bg-primary hover:bg-primary/90 text-primary-foreground text-lg !px-8 !py-6">
+                            Ver Sucursales
+                        </Button>
+
+                    </div>
+                </div>
+
+            </div>
             </div>
         </section>
     )

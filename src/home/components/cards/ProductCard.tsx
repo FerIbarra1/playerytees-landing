@@ -2,9 +2,16 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Star } from "lucide-react"
 import type { Product } from "@/mocks/Products"
+import { useCart } from "@/context/CartContext"
 
 export function ProductCard({ product }: { product: Product }) {
     const { title, image, rating, colors = [], inStock = true, tag } = product
+    const { addItem } = useCart()
+
+    const handleAddToCart = () => {
+        if (!inStock) return
+        addItem(product)
+    }
 
     return (
         <div className="group rounded-2xl border border-border bg-card overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
@@ -61,7 +68,11 @@ export function ProductCard({ product }: { product: Product }) {
                     <Button className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground">
                         Ver detalles
                     </Button>
-                    <Button className="flex-1 bg-emerald-500 hover:bg-emerald-600 text-primary-foreground hover:brightness-110">
+                    <Button
+                        className="flex-1 bg-emerald-500 hover:bg-emerald-600 text-primary-foreground hover:brightness-110"
+                        onClick={handleAddToCart}
+                        disabled={!inStock}
+                    >
                         Agregar al carrito
                     </Button>
                 </div>
