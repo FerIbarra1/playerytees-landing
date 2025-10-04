@@ -22,7 +22,8 @@ import {
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 
-const WHATSAPP_NUMBER_INTL = "526622914052" // +52 662 291 4052
+// const WHATSAPP_NUMBER_INTL = "526622914052" // +52 662 291 4052
+const WHATSAPP_NUMBER_INTL = "526428534771" // +52 642 853 4771
 
 const STORE_LABELS: Record<string, string> = {
     centro: "Centro - Hermosillo",
@@ -32,7 +33,6 @@ const STORE_LABELS: Record<string, string> = {
 
 function buildWhatsappMessage(params: { store: string; message: string }) {
     const storeLabel = STORE_LABELS[params.store] ?? "No especificada"
-    // Mensaje profesional y claro; el usuario solo rellena “message”
     const text = [
         "Hola, me gustaría solicitar una cotización.",
         "",
@@ -66,7 +66,6 @@ export const Navbar = () => {
         const encoded = buildWhatsappMessage({ store, message })
         const href = `https://wa.me/${WHATSAPP_NUMBER_INTL}?text=${encoded}`
 
-        // Cierra el diálogo y abre WhatsApp en una nueva pestaña
         setIsQuoteOpen(false)
         window.open(href, "_blank", "noopener,noreferrer")
     }
@@ -146,7 +145,7 @@ export const Navbar = () => {
 
             {/* Dialog Cotizar */}
             <Dialog open={isQuoteOpen} onOpenChange={setIsQuoteOpen}>
-                <DialogContent className="sm:max-w-md">
+                <DialogContent className="sm:max-w-xl">
                     <DialogHeader>
                         <DialogTitle>Solicitar cotización</DialogTitle>
                         <DialogDescription>
@@ -155,7 +154,7 @@ export const Navbar = () => {
                     </DialogHeader>
 
                     <form className="grid gap-4" onSubmit={onSubmitQuote}>
-                        <div className="grid gap-2">
+                        <div className="grid gap-3">
                             <Label htmlFor="store">Selecciona tienda</Label>
                             <Select value={store} onValueChange={(v) => setStore(v)}>
                                 <SelectTrigger id="store" className="w-full">
@@ -169,7 +168,7 @@ export const Navbar = () => {
                             </Select>
                         </div>
 
-                        <div className="grid gap-2">
+                        <div className="grid gap-3">
                             <Label htmlFor="message">Mensaje</Label>
                             <Textarea
                                 id="message"

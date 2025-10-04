@@ -23,7 +23,7 @@ interface SliderBannerProps {
 const slidesMock: Slide[] = [
     {
         id: "1",
-        image: "/Portada1.jpg",
+        image: "/Banner1.jpg",
         alt: "Descuentos por volumen",
         badge: "Oferta Especial",
         title: "Hasta 40% de descuento en pedidos mayoristas",
@@ -38,7 +38,7 @@ const slidesMock: Slide[] = [
     },
     {
         id: "2",
-        image: "/Portada1.jpg",
+        image: "/Banner2.jpg",
         alt: "Envío gratis",
         badge: "Envío Express",
         title: "Envío gratis en pedidos mayores a $5,000",
@@ -68,7 +68,7 @@ const slidesMock: Slide[] = [
     // },
     {
         id: "4",
-        image: "/Portada1.jpg",
+        image: "/Banner3.jpg",
         alt: "Clientes satisfechos",
         badge: "Confianza Garantizada",
         title: "Más de 500 empresas confían en nosotros",
@@ -134,7 +134,7 @@ export const SliderBanner = ({ slides = slidesMock, className = "" }: SliderBann
                                     <div className="h-full flex flex-col justify-center max-w-2xl">
                                         {/* Badge */}
                                         {slide.badge && (
-                                            <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500 backdrop-blur-sm rounded-full text-white font-semibold text-sm mb-4 w-fit animate-slide-in-left">
+                                            <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500 backdrop-blur-sm rounded-full text-secondary font-semibold text-sm mb-4 w-fit animate-slide-in-left">
                                                 <Icon className="h-4 w-4" />
                                                 <span>{slide.badge}</span>
                                             </div>

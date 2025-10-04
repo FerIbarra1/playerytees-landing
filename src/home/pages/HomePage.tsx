@@ -1,7 +1,11 @@
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Package, Users, Zap } from "lucide-react"
+import { ArrowRight, ChevronRight, Package, Users, Zap } from "lucide-react"
 import { useEffect, useState } from "react"
 import { SliderBanner } from "../components/sliders/SliderBanner"
+import { SliderBrands } from "../components/sliders/SliderBrands"
+import { BrandsMock } from "@/mocks/Brands"
+import { ProductsMock } from "@/mocks/Products"
+import { ProductCard } from "../components/cards/ProductCard"
 
 export const HomePage = () => {
     const [isVisible, setIsVisible] = useState(false)
@@ -10,7 +14,7 @@ export const HomePage = () => {
         setIsVisible(true)
     }, [])
     return (
-        <section className="relative lg:pt-10 overflow-hidden">
+        <section className="relative pt-10 overflow-hidden">
 
             <div className="container mx-auto px-4 lg:px-8">
                 <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -31,11 +35,11 @@ export const HomePage = () => {
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4">
-                            <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground text-lg h-14 px-8">
+                            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground text-lg !px-8 !py-6">
                                 Ver Productos
                                 <ArrowRight className="ml-2 h-5 w-5" />
                             </Button>
-                            <Button size="lg" variant="outline" className="text-lg h-14 px-8 bg-transparent">
+                            <Button className="bg-emerald-500 hover:bg-emerald-600 text-primary-foreground text-lg !px-8 !py-6">
                                 Solicitar Cotización
                             </Button>
                         </div>
@@ -74,8 +78,8 @@ export const HomePage = () => {
                             {/* Floating Cards */}
                             <div className="absolute -top-4 -right-4 bg-card border border-border rounded-2xl p-4 shadow-lg animate-float">
                                 <div className="flex items-center gap-3">
-                                    <div className="w-12 h-12 bg-secondary/10 rounded-xl flex items-center justify-center">
-                                        <Package className="h-6 w-6 text-secondary" />
+                                    <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
+                                        <Package className="h-6 w-6 text-emerald-500" />
                                     </div>
                                     <div>
                                         <p className="font-bold text-foreground">Pedido Mínimo</p>
@@ -90,7 +94,7 @@ export const HomePage = () => {
                             >
                                 <div className="flex items-center gap-3">
                                     <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
-                                        <Zap className="h-6 w-6 text-primary" />
+                                        <Zap className="h-6 w-6 text-emerald-500" />
                                     </div>
                                     <div>
                                         <p className="font-bold text-foreground">Envío Express</p>
@@ -102,6 +106,60 @@ export const HomePage = () => {
                     </div>
                 </div>
                 <SliderBanner />
+                <SliderBrands
+                    brands={[...BrandsMock, ...BrandsMock]}
+                />
+                <div className="py-10 px-6">
+                    <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground mb-10 text-center">
+                        Conoce nuestros productos más populares
+                    </h3>
+                    <div className="flex flex-col gap-3 sm:flex-row justify-between items-center">
+                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground">
+                            Caballero
+                        </h2>
+                        <Button variant="link" className="text-lg hover:text-emerald-500">
+                            Ver todos los productos
+                            <ChevronRight />
+                        </Button>
+                    </div>
+                    <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        {ProductsMock.slice(0, 4).map((product) => (
+                            <ProductCard key={product.id} product={product} />
+                        ))}
+                    </div>
+                </div>
+                <div className="py-10 px-6">
+                    <div className="flex flex-col gap-3 sm:flex-row justify-between items-center">
+                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground">
+                            Dama
+                        </h2>
+                        <Button variant="link" className="text-lg hover:text-emerald-500">
+                            Ver todos los productos
+                            <ChevronRight />
+                        </Button>
+                    </div>
+                    <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        {ProductsMock.slice(0, 4).map((product) => (
+                            <ProductCard key={product.id} product={product} />
+                        ))}
+                    </div>
+                </div>
+                <div className="py-10 px-6">
+                    <div className="flex flex-col gap-3 sm:flex-row justify-between items-center">
+                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground">
+                            Niños
+                        </h2>
+                        <Button variant="link" className="text-lg hover:text-emerald-500">
+                            Ver todos los productos
+                            <ChevronRight />
+                        </Button>
+                    </div>
+                    <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        {ProductsMock.slice(0, 4).map((product) => (
+                            <ProductCard key={product.id} product={product} />
+                        ))}
+                    </div>
+                </div>
             </div>
         </section>
     )
