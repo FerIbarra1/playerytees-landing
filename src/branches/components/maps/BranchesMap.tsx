@@ -4,6 +4,9 @@ import type { Branch } from "@/interfaces/Branch"
 import { Store } from "lucide-react"
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet"
 
+import "leaflet/dist/leaflet.css";
+
+
 interface Props {
     branches: Branch[];
 }
