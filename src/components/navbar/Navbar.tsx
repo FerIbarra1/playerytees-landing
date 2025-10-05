@@ -1,7 +1,7 @@
-import { Menu, ShoppingCart } from "lucide-react"
+import { Menu, ShoppingCart, Trash2 } from "lucide-react"
 import { Button } from "../ui/button"
 import { useMemo, useState } from "react"
-import { Link } from "react-router"
+import { Link, useLocation } from "react-router"
 import { ModeToggle } from "../theme/ThemeToggle"
 
 import {
@@ -31,12 +31,16 @@ import {
 } from "@/components/ui/drawer"
 import { useCart } from "@/context/CartContext"
 
+
 const WHATSAPP_NUMBER_INTL = "526428534771"
+
 const STORE_LABELS: Record<string, string> = {
     centro: "Centro - Hermosillo",
     norte: "Sucursal Norte",
     sur: "Sucursal Sur",
 }
+
+
 
 function buildWhatsappMessage(params: { store: string; message: string }) {
     const storeLabel = STORE_LABELS[params.store] ?? "No especificada"
@@ -68,6 +72,8 @@ export const Navbar = () => {
     const [message, setMessage] = useState("")
     const { items, count, isOpen, openCart, closeCart, removeItem, clearCart } = useCart()
 
+
+
     const displayCount = useMemo(() => {
         if (count > 99) return "99+"
         return String(count)
@@ -85,6 +91,20 @@ export const Navbar = () => {
         window.open(href, "_blank", "noopener,noreferrer")
     }
 
+    const { pathname } = useLocation()
+
+    const navLinkClass = (to: string) => {
+        const active = pathname === to || pathname.startsWith(`${to}/`)
+        return [
+            "relative inline-block py-1 font-medium transition-colors",
+            active ? "text-emerald-600" : "text-foreground hover:text-emerald-500",
+            // underline animada
+            "after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:bg-emerald-500",
+            "after:transition-[width] after:duration-300",
+            active ? "after:w-full" : "after:w-0 hover:after:w-full",
+        ].join(" ")
+    }
+
     return (
         <header className="sticky top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
             <div className="container mx-auto px-4 lg:px-8">
@@ -96,13 +116,13 @@ export const Navbar = () => {
 
                     {/* Desktop Navigation */}
                     <nav className="hidden md:flex items-center gap-8">
-                        <Link to="/productos" className="text-foreground hover:text-primary transition-colors font-medium">
+                        {/* <Link to="/productos" className={navLinkClass("/productos")}>
                             Productos
-                        </Link>
-                        <Link to="/quienes-somos" className="text-foreground hover:text-primary transition-colors font-medium">
+                        </Link> */}
+                        <Link to="/quienes-somos" className={navLinkClass("/quienes-somos")}>
                             Quienes Somos
                         </Link>
-                        <Link to="/sucursales" className="text-foreground hover:text-primary transition-colors font-medium">
+                        <Link to="/sucursales" className={navLinkClass("/sucursales")}>
                             Sucursales
                         </Link>
                         {/* <Link to="/distribuidores" className="text-foreground hover:text-primary transition-colors font-medium">
@@ -113,19 +133,19 @@ export const Navbar = () => {
                     {/* Actions */}
                     <div className="flex items-center gap-3">
                         <ModeToggle />
-                        <Button variant="ghost" size="icon" className="relative" onClick={openCart} aria-label="Abrir carrito">
+                        {/* <Button variant="ghost" size="icon" className="relative" onClick={openCart} aria-label="Abrir carrito">
                             <ShoppingCart className="h-5 w-5" />
                             {count > 0 && (
                                 <span className="absolute -right-1 -top-1 flex h-5 min-w-[1.25rem] items-center justify-center rounded-full bg-emerald-500 px-1 text-xs font-semibold text-primary-foreground">
                                     {displayCount}
                                 </span>
                             )}
-                        </Button>
+                        </Button> */}
                         <Button
                             className="hidden sm:flex bg-emerald-500 hover:bg-emerald-600 text-primary-foreground hover:brightness-110"
                             onClick={() => setIsQuoteOpen(true)}
                         >
-                            Cotizar ahora
+                            Solicitar cotización
                         </Button>
                         <Button
                             variant="ghost"
@@ -143,13 +163,13 @@ export const Navbar = () => {
                 {isMenuOpen && (
                     <div className="md:hidden py-4 border-t border-border animate-fade-in-up">
                         <nav className="flex flex-col gap-4">
-                            <Link to="/productos" className="text-foreground hover:text-primary transition-colors font-medium">
+                            <Link to="/productos" className={navLinkClass("/productos")}>
                                 Productos
                             </Link>
-                            <Link to="/quienes-somos" className="text-foreground hover:text-primary transition-colors font-medium">
+                            <Link to="/quienes-somos" className={navLinkClass("/quienes-somos")}>
                                 Quienes Somos
                             </Link>
-                            <Link to="/sucursales" className="text-foreground hover:text-primary transition-colors font-medium">
+                            <Link to="/sucursales" className={navLinkClass("/sucursales")}>
                                 Sucursales
                             </Link>
                             {/* <Link to="/distribuidores" className="text-foreground hover:text-primary transition-colors font-medium">
@@ -199,7 +219,7 @@ export const Navbar = () => {
                                                 className="text-destructive hover:text-destructive"
                                                 onClick={() => removeItem(item.product.id)}
                                             >
-                                                Quitar
+                                                <Trash2 className="h-4 w-4" />
                                             </Button>
                                         </div>
                                     ))}

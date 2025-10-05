@@ -34,11 +34,11 @@ export const Footer = () => {
                     <div>
                         <h4 className="text-base font-semibold">Explorar</h4>
                         <ul className="mt-4 space-y-2 text-sm">
-                            <li>
+                            {/* <li>
                                 <Link to="/productos" className="text-muted-foreground hover:text-primary transition-colors">
                                     Productos
                                 </Link>
-                            </li>
+                            </li> */}
                             <li>
                                 <Link to="/quienes-somos" className="text-muted-foreground hover:text-primary transition-colors">
                                     Quiénes somos

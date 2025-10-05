@@ -6,6 +6,7 @@ import { SliderBrands } from "../components/sliders/SliderBrands"
 import { BrandsMock } from "@/mocks/Brands"
 import { ProductsMock } from "@/mocks/Products"
 import { ProductCard } from "../components/cards/ProductCard"
+import { Link } from "react-router"
 
 export const HomePage = () => {
     const [isVisible, setIsVisible] = useState(false)
@@ -35,10 +36,10 @@ export const HomePage = () => {
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4">
-                            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground text-lg !px-8 !py-6">
+                            {/* <Button className="bg-primary hover:bg-primary/90 text-primary-foreground text-lg !px-8 !py-6">
                                 Ver Productos
                                 <ArrowRight className="ml-2 h-5 w-5" />
-                            </Button>
+                            </Button> */}
                             <Button className="bg-emerald-500 hover:bg-emerald-600 text-primary-foreground text-lg !px-8 !py-6">
                                 Solicitar Cotización
                             </Button>
@@ -109,7 +110,7 @@ export const HomePage = () => {
                 <SliderBrands
                     brands={[...BrandsMock, ...BrandsMock]}
                 />
-                <div className="py-10 px-6">
+                {/* <div className="py-10 px-6">
                     <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground mb-10 text-center">
                         Conoce nuestros productos más populares
                     </h3>
@@ -159,7 +160,7 @@ export const HomePage = () => {
                             <ProductCard key={product.id} product={product} />
                         ))}
                     </div>
-                </div>
+                </div> */}
                 <div className="py-10 px-6 flex items-center justify-center">
                     <div className="relative overflow-hidden flex flex-col justify-center items-center rounded-tl-4xl rounded-br-4xl h-140 w-full px-6">
                         <img
@@ -187,7 +188,7 @@ export const HomePage = () => {
 
                             <div className="mt-6 flex items-center justify-center gap-3">
                                 <Button className="bg-primary hover:bg-primary/90 text-primary-foreground text-lg !px-8 !py-6">
-                                    Conócenos
+                                    <Link to="/quienes-somos">Conócenos</Link>
                                 </Button>
                             </div>
                         </div>
@@ -221,7 +222,7 @@ export const HomePage = () => {
 
                             <div className="mt-6 flex items-center justify-center gap-3">
                                 <Button className="bg-primary hover:bg-primary/90 text-primary-foreground text-lg !px-8 !py-6">
-                                    Ver sucursales
+                                    <Link to="/sucursales">Ver sucursales</Link>
                                 </Button>
                             </div>
 
