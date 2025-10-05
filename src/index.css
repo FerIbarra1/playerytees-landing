@@ -4,7 +4,7 @@
 @import "swiper/css/navigation";
 @import "swiper/css/pagination";
 @import "swiper/css/effect-fade";
-
+@import "leaflet/dist/leaflet.css";
 
 @custom-variant dark (&:is(.dark *));
 
