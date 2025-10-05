@@ -23,7 +23,7 @@ interface SliderBannerProps {
 const slidesMock: Slide[] = [
     {
         id: "1",
-        image: "/Banner1.jpg",
+        image: "/banners/Banner1.jpg",
         alt: "Descuentos por volumen",
         badge: "Oferta Especial",
         title: "Hasta 40% de descuento en pedidos mayoristas",
@@ -38,7 +38,7 @@ const slidesMock: Slide[] = [
     },
     {
         id: "2",
-        image: "/Banner2.jpg",
+        image: "/banners/Banner2.jpg",
         alt: "Envío gratis",
         badge: "Envío Express",
         title: "Envío gratis en pedidos mayores a $5,000",
@@ -68,7 +68,7 @@ const slidesMock: Slide[] = [
     // },
     {
         id: "4",
-        image: "/Banner3.jpg",
+        image: "/banners/Banner3.jpg",
         alt: "Clientes satisfechos",
         badge: "Confianza Garantizada",
         title: "Más de 500 empresas confían en nosotros",

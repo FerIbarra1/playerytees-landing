@@ -162,7 +162,7 @@ export const HomePage = () => {
                 <div className="py-10 px-6 flex items-center justify-center">
                     <div className="relative overflow-hidden flex flex-col justify-center items-center rounded-tl-4xl rounded-br-4xl h-140 w-full px-6">
                         <img
-                            src="/Banner5.webp"
+                            src="/banners/Banner5.webp"
                             alt="Equipo trabajando en taller textil"
                             className="absolute inset-0 w-full h-full object-cover"
                         />
@@ -196,7 +196,7 @@ export const HomePage = () => {
                     <div className="relative overflow-hidden flex flex-col justify-center items-center rounded-tl-4xl rounded-br-4xl h-140 w-full px-6">
                         {/* Fondo */}
                         <img
-                            src="/Banner4.jpg"
+                            src="/banners/Banner4.jpg"
                             alt="Mapa y localización de sucursales"
                             className="absolute inset-0 w-full h-full object-cover"
                         />

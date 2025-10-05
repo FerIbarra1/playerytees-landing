@@ -52,7 +52,7 @@ export const InfoPage = () => {
             {/* HERO */}
             <section className="relative overflow-hidden">
                 <div className="absolute inset-0">
-                    <img src="/Banner1.jpg" alt="Taller y logística textil" className="w-full h-full object-cover" />
+                    <img src="/banners/Banner1.jpg" alt="Taller y logística textil" className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-black/30" />
                 </div>
 
