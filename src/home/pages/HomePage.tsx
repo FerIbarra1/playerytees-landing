@@ -1,11 +1,9 @@
 import { Button } from "@/components/ui/button"
-import { ArrowRight, ChevronRight, Package, Users, Zap } from "lucide-react"
+import { Package, Users, Zap } from "lucide-react"
 import { useEffect, useState } from "react"
 import { SliderBanner } from "../components/sliders/SliderBanner"
 import { SliderBrands } from "../components/sliders/SliderBrands"
 import { BrandsMock } from "@/mocks/Brands"
-import { ProductsMock } from "@/mocks/Products"
-import { ProductCard } from "../components/cards/ProductCard"
 import { Link } from "react-router"
 
 export const HomePage = () => {
